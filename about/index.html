@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Lucas-Zh">
+
+
+
+
+
+<title>About me and this site | lucas-zh&#39;s site</title>
+
+
+
+    <link rel="icon" href="/image/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="lucas-zh's site" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Lucas-Zh&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Lucas-Zh&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    <article class="post-wrap page">
+        
+        <h2 class="post-title">About me and this site</h2>
+        
+        <section class="post-content">
+            <h2 id="个人简介"><a class="markdownIt-Anchor" href="#个人简介"></a> 个人简介</h2>
+<blockquote>
+<p>本科阶段：集美大学（大四在读）<br />
+研究生阶段：南京航空航天大学（保研）<br />
+研究方向：机器学习 / 人工智能 / 医学影像分析<br />
+发展方向：Java开发 / 架构师 / 算法工程师</p>
+</blockquote>
+<h2 id="为什么搭建这个博客"><a class="markdownIt-Anchor" href="#为什么搭建这个博客"></a> 为什么搭建这个博客</h2>
+<h3 id="知识输出"><a class="markdownIt-Anchor" href="#知识输出"></a> 知识输出</h3>
+<blockquote>
+<p>很多时候学完东西，当时记得很清楚，并且能够灵活使用。但是过了一两个月之后，发现有些东西已经忘的差不多了。所以，建立博客的第一个原因就是把自己学的东西进行输出，有输出的学习才有价值，才会有收获。并且在输出的同时，我们也可以学习到独立思考、反省和如何将内容更好地进行表达。</p>
+</blockquote>
+<h3 id="写更好的文章"><a class="markdownIt-Anchor" href="#写更好的文章"></a> 写更好的文章</h3>
+<blockquote>
+<p>当想要解决一个技术问题时，通常会去网上搜索（如CSDN、Stack Overflow），但是目前网络上的教程存在着一些普遍问题：互相抄袭、重复度太高、没用。所以我决定写一个自己的博客。但是，技术文章由于软件更新，版本迭代，过了一定时间就会失效。所以搭建自己博客，可以对问题更好的进行修复。</p>
+</blockquote>
+<h2 id="本站信息"><a class="markdownIt-Anchor" href="#本站信息"></a> 本站信息</h2>
+<blockquote>
+<p>1.Hexo + NexT.Mist<br />
+2.Valine评论<br />
+3.Addthis Dashboard</p>
+</blockquote>
+
+        </section>
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Lucas-Zh | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
