@@ -3,11 +3,11 @@
   <title>lucas-zh&#39;s site</title>
   
   
-  <link href="http://lucas-zh.top/atom.xml" rel="self"/>
+  <link href="http://exlucas1.github.io/atom.xml" rel="self"/>
   
-  <link href="http://lucas-zh.top/"/>
+  <link href="http://exlucas1.github.io/"/>
   <updated>2021-11-10T13:01:13.312Z</updated>
-  <id>http://lucas-zh.top/</id>
+  <id>http://exlucas1.github.io/</id>
   
   <author>
     <name>Lucas-Zh</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://lucas-zh.top/2021/11/10/hello-world/"/>
-    <id>http://lucas-zh.top/2021/11/10/hello-world/</id>
+    <link href="http://exlucas1.github.io/2021/11/10/hello-world/"/>
+    <id>http://exlucas1.github.io/2021/11/10/hello-world/</id>
     <published>2021-11-10T13:01:13.312Z</published>
     <updated>2021-11-10T13:01:13.312Z</updated>
     
@@ -38,8 +38,8 @@
   
   <entry>
     <title>ML-FirstWeek</title>
-    <link href="http://lucas-zh.top/2021/11/07/ML-FirstWeek/"/>
-    <id>http://lucas-zh.top/2021/11/07/ML-FirstWeek/</id>
+    <link href="http://exlucas1.github.io/2021/11/07/ML-FirstWeek/"/>
+    <id>http://exlucas1.github.io/2021/11/07/ML-FirstWeek/</id>
     <published>2021-11-07T07:44:33.000Z</published>
     <updated>2021-11-11T13:51:33.048Z</updated>
     
@@ -70,16 +70,16 @@ svd:奇异值分解  内置在Octave中&lt;/p&gt;</summary>
     
     
     
-    <category term="Coursera-ML" scheme="http://lucas-zh.top/categories/Coursera-ML/"/>
+    <category term="Coursera-ML" scheme="http://exlucas1.github.io/categories/Coursera-ML/"/>
     
     
-    <category term="机器学习" scheme="http://lucas-zh.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习" scheme="http://exlucas1.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="监督学习" scheme="http://lucas-zh.top/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
+    <category term="监督学习" scheme="http://exlucas1.github.io/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="无监督学习" scheme="http://lucas-zh.top/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
+    <category term="无监督学习" scheme="http://exlucas1.github.io/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
     
-    <category term="线性回归" scheme="http://lucas-zh.top/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/"/>
+    <category term="线性回归" scheme="http://exlucas1.github.io/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/"/>
     
   </entry>
   
