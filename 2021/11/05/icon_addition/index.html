@@ -25,7 +25,7 @@
     <!-- stylesheets list from _config.yml -->
     
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_2932977_y3vutho7bl.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2932977_6m9s9dq8555.css">
     
 
 
@@ -70,7 +70,7 @@
         <header>
     <nav class="navbar">
         <div class="container">
-            <div class="navbar-header header-logo"><a href="/">Lucas-Zh&#39;s Blog</a></div>
+            <div class="navbar-header header-logo"><a href="/">Lucas-Zh&#39;s Site</a></div>
             <div class="menu navbar-right">
                 
                     <a class="menu-item" href="/archives">
@@ -124,7 +124,7 @@
         <div class="container">
             <div class="navbar-header">
                 <div>
-                    <a href="/">Lucas-Zh&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                    <a href="/">Lucas-Zh&#39;s Site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
                 </div>
                 <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
             </div>
@@ -289,9 +289,18 @@
         </header>
 
         <div class="post-content">
-            <h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+            <div class="toc">
+<!-- toc -->
+<ul>
+<li><a href="#qian-yan">前言</a></li>
+<li><a href="#ju-ti-cao-zuo">具体操作</a></li>
+<li><a href="#xiao-guo-zhan-shi">效果展示</a></li>
+</ul>
+<!-- tocstop -->
+</div>
+<h1><span id="qian-yan"> 前言</span><a href="#qian-yan" class="header-anchor">#</a></h1>
 <p>由于<code>Chic</code>中的样式基本为文字构成，为了做一些美化，且<code>Chic</code>提供的iconfont矢量图标较少，我想要寻找一种能够导入自己喜欢图标的方法。<a target="_blank" rel="noopener" href="https://www.iconfont.cn/?spm=a313x.7781069.1998910419.d4d0a486a">iconfont</a>上有非常多精美的矢量图标，所以我将基于这个网站来实现我的目标。</p>
-<h1 id="具体操作"><a class="markdownIt-Anchor" href="#具体操作"></a> 具体操作</h1>
+<h1><span id="ju-ti-cao-zuo"> 具体操作</span><a href="#ju-ti-cao-zuo" class="header-anchor">#</a></h1>
 <p>1.建立项目<br>
 找到你想添加的图标，将你想要添加的图标点击 “添加入库” 按钮。<br>
 <img src="/2021/11/05/icon_addition/1.jpg" alt="1"></p>
@@ -306,7 +315,7 @@
 <p>4.修改Chic主题配置文件<br>
 复制第3步生成的在线链接，找到<code>themes/Chic/_partial/head.ejs</code>，在该文件中找到，新增<code>&lt;link rel=&quot;stylesheet&quot; href=&quot;//at.alicdn.com/t/font_2932977_r09dyogs5xa.css&quot;&gt;</code>这段代码，href中的内容即为生成的在线链接。自此，你已经可以根据适量图标的名称在你的博客中进行调用了。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;%# css list %&gt;</span><br><span class="line">&lt;% if (theme.stylesheets !== undefined &amp;&amp; theme.stylesheets.length &gt; 0) &#123; %&gt;</span><br><span class="line">    &lt;!-- stylesheets list from _config.yml --&gt;</span><br><span class="line">    &lt;% theme.stylesheets.forEach(url =&gt; &#123; %&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;&lt;%- url_for(url) %&gt;&quot;&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;//at.alicdn.com/t/font_2932977_r09dyogs5xa.css&quot;&gt;</span><br><span class="line">    &lt;% &#125;); %&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="效果展示"><a class="markdownIt-Anchor" href="#效果展示"></a> 效果展示</h1>
+<h1><span id="xiao-guo-zhan-shi"> 效果展示</span><a href="#xiao-guo-zhan-shi" class="header-anchor">#</a></h1>
 <p><img src="/2021/11/05/icon_addition/5.jpg" alt="5"></p>
 <p>参考链接：</p>
 <ul>
@@ -402,6 +411,7 @@
         
 
     </article>
+    
 </div>
 
             </div>
