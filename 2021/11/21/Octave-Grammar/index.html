@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Lucas-Zh">
+
+
+
+
+
+<title>Octave语法 | lucas-zh&#39;s site</title>
+
+
+
+    <link rel="icon" href="/image/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2932977_ej31m7kjca7.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="lucas-zh's site" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Lucas-Zh&#39;s Site</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categories "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Lucas-Zh&#39;s Site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categories "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Octave语法</h1>
+            
+                <div class="post-meta">
+                    
+                        <i class="iconfont icon-user"></i>
+                        <a itemprop="author" rel="author" href="/">Lucas-Zh</a> &nbsp;
+                    
+
+                    
+                        <span class="post-time">
+                            <i class="iconfont icon-time"></i>
+                            <a href="#">November 21, 2021&nbsp;&nbsp;20:57:30</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/Octave/">Octave</a>&nbsp;
+                            
+                        </span>
+                        <span id="/2021/11/21/Octave-Grammar/" class="leancloud-visitors view" data-flag-title="Octave语法">
+                            <em class="post-meta-item-text"><i class="iconfont icon-eye"></i></em>
+                            <i class="leancloud-visitors-count">loading</i>
+                          </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <div class="toc">
+<!-- toc -->
+<ul>
+<li><a href="#octave-yu-fa">Octave 语法</a>
+<ul>
+<li><a href="#xiang-liang">向量</a></li>
+<li><a href="#chuang-jian-yu-fang-wen">创建与访问</a>
+<ul>
+<li><a href="#xing-xiang-liang">行向量</a></li>
+<li><a href="#lie-xiang-liang">列向量</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#ju-zhen">矩阵</a>
+<ul>
+<li><a href="#chuang-jian">创建</a>
+<ul>
+<li><a href="#chuang-jian-ji-qiao">创建技巧</a></li>
+</ul>
+</li>
+<li><a href="#te-shu-ju-zhen">特殊矩阵</a>
+<ul>
+<li><a href="#dan-wei-ju-zhen">单位矩阵</a></li>
+<li><a href="#zhuan-zhi-ju-zhen">转置矩阵</a></li>
+<li><a href="#ni-ju-zhen">逆矩阵</a></li>
+<li><a href="#quan-1-ju-zhen">全1矩阵</a></li>
+<li><a href="#quan-0-ju-zhen">全0矩阵</a></li>
+<li><a href="#sui-ji-ju-zhen">随机矩阵</a></li>
+<li><a href="#gao-si-fen-bu-ju-zhen">高斯分布矩阵</a></li>
+</ul>
+</li>
+<li><a href="#fang-wen">访问</a>
+<ul>
+<li><a href="#fang-wen-yuan-su">访问元素</a></li>
+<li><a href="#fang-wen-dan-xing-huo-dan-lie">访问单行或单列</a></li>
+<li><a href="#fang-wen-duo-xing-huo-duo-lie">访问多行或多列</a></li>
+</ul>
+</li>
+<li><a href="#lian-jie">连接</a>
+<ul>
+<li><a href="#tian-jia-yuan-su">添加元素</a></li>
+<li><a href="#tian-jia-xing-huo-lie">添加行或列</a></li>
+<li><a href="#ju-zhen-lian-jie">矩阵连接</a></li>
+</ul>
+</li>
+<li><a href="#suo-you-de-shu-ju-fang-ru-yi-ge-xiang-liang-zhong">所有的数据放入一个向量中</a></li>
+</ul>
+</li>
+<li><a href="#fu-zhi">赋值</a></li>
+<li><a href="#yun-suan">运算</a>
+<ul>
+<li><a href="#jia-jian">加，减</a></li>
+<li><a href="#xiang-cheng">相乘</a></li>
+<li><a href="#dian-yun-suan">点运算</a>
+<ul>
+<li><a href="#wei-du-xiang-tong">维度相同</a></li>
+<li><a href="#xing-wei-du-xiang-tong">行维度相同</a></li>
+<li><a href="#lie-wei-du-xiang-tong">列维度相同</a></li>
+<li><a href="#dian-chu">点除</a></li>
+</ul>
+</li>
+<li><a href="#luo-ji">逻辑</a></li>
+<li><a href="#wei-yun-suan">位运算</a></li>
+</ul>
+</li>
+<li><a href="#kong-zhi-yu-ju">控制语句</a>
+<ul>
+<li><a href="#if">if</a></li>
+<li><a href="#for">for</a></li>
+<li><a href="#while">while</a></li>
+<li><a href="#break-continue">break，continue</a></li>
+</ul>
+</li>
+<li><a href="#han-shu">函数</a>
+<ul>
+<li><a href="#size">size</a></li>
+<li><a href="#length">length</a></li>
+<li><a href="#who">who</a></li>
+<li><a href="#whos">whos</a></li>
+<li><a href="#clear">clear</a></li>
+<li><a href="#find">find</a></li>
+<li><a href="#sum">sum</a></li>
+<li><a href="#prod">prod</a></li>
+<li><a href="#max">max</a>
+<ul>
+<li><a href="#xiang-liang-1">向量</a></li>
+<li><a href="#ju-zhen-bi-jiao">矩阵比较</a></li>
+<li><a href="#xing-yu-lie-de-zui-da-zhi">行与列的最大值</a></li>
+<li><a href="#randperm">randperm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#zi-ding-yi-han-shu">自定义函数</a>
+<ul>
+<li><a href="#chuang-jian-bu-zou">创建步骤</a></li>
+<li><a href="#diao-yong">调用</a></li>
+</ul>
+</li>
+<li><a href="#shu-ju">数据</a>
+<ul>
+<li><a href="#lu-jing">路径</a></li>
+<li><a href="#zai-ru-yu-bao-cun">载入与保存</a></li>
+</ul>
+</li>
+<li><a href="#qi-ta">其他</a>
+<ul>
+<li><a href="#ming-ling">命令</a></li>
+<li><a href="#zhu-shi">注释</a></li>
+<li><a href="#da-yin">打印</a>
+<ul>
+<li><a href="#zi-dong-da-yin">自动打印</a></li>
+<li><a href="#ge-shi-hua">格式化</a></li>
+<li><a href="#mo-ren-ge-shi">默认格式</a></li>
+</ul>
+</li>
+<li><a href="#bang-zhu">帮助</a></li>
+</ul>
+</li>
+<li><a href="#tu">图</a>
+<ul>
+<li><a href="#plot">plot</a>
+<ul>
+<li><a href="#shu-xing">属性</a></li>
+<li><a href="#x-y-zhou">x，y轴</a></li>
+</ul>
+</li>
+<li><a href="#zhi-fang-tu">直方图</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+</div>
+<h1><span id="octave-yu-fa"> Octave 语法</span><a href="#octave-yu-fa" class="header-anchor">#</a></h1>
+<h2><span id="xiang-liang"> 向量</span><a href="#xiang-liang" class="header-anchor">#</a></h2>
+<ul>
+<li>分号：分割行</li>
+<li>空格或逗号：分割列</li>
+</ul>
+<h2><span id="chuang-jian-yu-fang-wen"> 创建与访问</span><a href="#chuang-jian-yu-fang-wen" class="header-anchor">#</a></h2>
+<h3><span id="xing-xiang-liang"> 行向量</span><a href="#xing-xiang-liang" class="header-anchor">#</a></h3>
+<ul>
+<li>空格或逗号分割</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span> v = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>] % 等效：v = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">v =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">   </span><br><span class="line"><span class="meta">&gt;&gt;</span> v(<span class="number">2</span>) % 只有一行，所以指定就是列</span><br><span class="line">ans =  <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h3><span id="lie-xiang-liang"> 列向量</span><a href="#lie-xiang-liang" class="header-anchor">#</a></h3>
+<ul>
+<li>分号分割</li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; v = [<span class="number">1</span><span class="comment">; 2; 3]</span></span><br><span class="line"><span class="attribute">v</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span></span><br><span class="line">   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; v(<span class="number">2</span>) % 只有一列，所以指定就是行</span><br><span class="line"><span class="attribute">ans</span> =  <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h1><span id="ju-zhen"> 矩阵</span><a href="#ju-zhen" class="header-anchor">#</a></h1>
+<ul>
+<li>与向量一样，空格或逗号分割列，分号分割行</li>
+<li>冒号：代表所有，所有行或所有列</li>
+</ul>
+<h2><span id="chuang-jian"> 创建</span><a href="#chuang-jian" class="header-anchor">#</a></h2>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;   <span class="keyword">A</span> = [<span class="number">1</span>, <span class="number">2</span><span class="comment">; 3, 4] % 一行写完</span></span><br><span class="line"><span class="keyword">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="keyword">A</span> = [<span class="number">1</span>, <span class="number">2</span><span class="comment">; % 分行写</span></span><br><span class="line">&gt; <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="keyword">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h3><span id="chuang-jian-ji-qiao"> 创建技巧</span><a href="#chuang-jian-ji-qiao" class="header-anchor">#</a></h3>
+<ul>
+<li>a:c — 从a到c</li>
+<li>a: b: c — 从a，间隔b，到c</li>
+<li>向量也可以用这样的方法创建</li>
+</ul>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1:3; 4:6]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 1 </span> <span class="number"> 2 </span>  3</span><br><span class="line">  <span class="number"> 4 </span> <span class="number"> 5 </span>  6</span><br><span class="line">   </span><br><span class="line">&gt;&gt; A = [1:2:5; 2:2:6]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 1 </span> <span class="number"> 3 </span>  5</span><br><span class="line">  <span class="number"> 2 </span> <span class="number"> 4 </span>  6</span><br></pre></td></tr></table></figure>
+<h2><span id="te-shu-ju-zhen"> 特殊矩阵</span><a href="#te-shu-ju-zhen" class="header-anchor">#</a></h2>
+<h3><span id="dan-wei-ju-zhen"> 单位矩阵</span><a href="#dan-wei-ju-zhen" class="header-anchor">#</a></h3>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; eye(3) % 单位矩阵</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">Diagonal Matrix</span><br><span class="line"></span><br><span class="line">  <span class="number"> 1 </span> <span class="number"> 0 </span>  0</span><br><span class="line">  <span class="number"> 0 </span> <span class="number"> 1 </span>  0</span><br><span class="line">  <span class="number"> 0 </span> <span class="number"> 0 </span>  1</span><br><span class="line"></span><br><span class="line">&gt;&gt; flipud(eye(3))</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">Permutation Matrix</span><br><span class="line"></span><br><span class="line">  <span class="number"> 0 </span> <span class="number"> 0 </span>  1</span><br><span class="line">  <span class="number"> 0 </span> <span class="number"> 1 </span>  0</span><br><span class="line">  <span class="number"> 1 </span> <span class="number"> 0 </span>  0</span><br></pre></td></tr></table></figure>
+<h3><span id="zhuan-zhi-ju-zhen"> 转置矩阵</span><a href="#zhuan-zhi-ju-zhen" class="header-anchor">#</a></h3>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">A =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 1 </span>  2</span><br><span class="line">  <span class="number"> 3 </span>  4</span><br><span class="line"></span><br><span class="line">&gt;&gt; A&#x27;</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 1 </span>  3</span><br><span class="line">  <span class="number"> 2 </span>  4</span><br></pre></td></tr></table></figure>
+<h3><span id="ni-ju-zhen"> 逆矩阵</span><a href="#ni-ju-zhen" class="header-anchor">#</a></h3>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; pinv(<span class="keyword">A</span>)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  -<span class="number">2.00000</span>   <span class="number">1.00000</span></span><br><span class="line">   <span class="number">1.50000</span>  -<span class="number">0.50000</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; pinv(<span class="keyword">A</span>) * <span class="keyword">A</span></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">1.00000</span>   <span class="number">0.00000</span></span><br><span class="line">  -<span class="number">0.00000</span>   <span class="number">1.00000</span></span><br></pre></td></tr></table></figure>
+<h3><span id="quan-1-ju-zhen"> 全1矩阵</span><a href="#quan-1-ju-zhen" class="header-anchor">#</a></h3>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; ones(2, 3)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 1 </span> <span class="number"> 1 </span>  1</span><br><span class="line">  <span class="number"> 1 </span> <span class="number"> 1 </span>  1</span><br></pre></td></tr></table></figure>
+<h3><span id="quan-0-ju-zhen"> 全0矩阵</span><a href="#quan-0-ju-zhen" class="header-anchor">#</a></h3>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; 0*ones(2, 3)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 0 </span> <span class="number"> 0 </span>  0</span><br><span class="line">  <span class="number"> 0 </span> <span class="number"> 0 </span>  0</span><br><span class="line">&gt;&gt; zeros(2, 3)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 0 </span> <span class="number"> 0 </span>  0</span><br><span class="line">  <span class="number"> 0 </span> <span class="number"> 0 </span>  0</span><br></pre></td></tr></table></figure>
+<h3><span id="sui-ji-ju-zhen"> 随机矩阵</span><a href="#sui-ji-ju-zhen" class="header-anchor">#</a></h3>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; rand(<span class="number">1</span>, <span class="number">3</span>) % <span class="number">0</span>~<span class="number">1</span>的随机数，<span class="number">1</span>行<span class="number">3</span>列</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">0.99291</span>   <span class="number">0.65946</span>   <span class="number">0.95102</span></span><br></pre></td></tr></table></figure>
+<h3><span id="gao-si-fen-bu-ju-zhen"> 高斯分布矩阵</span><a href="#gao-si-fen-bu-ju-zhen" class="header-anchor">#</a></h3>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; randn(<span class="number">1</span>, <span class="number">3</span>) % 高斯分布</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">0.14646</span>   <span class="number">2.02587</span>   <span class="number">1.33266</span></span><br></pre></td></tr></table></figure>
+<h2><span id="fang-wen"> 访问</span><a href="#fang-wen" class="header-anchor">#</a></h2>
+<ul>
+<li>冒号：代表所有，所有行或所有列</li>
+</ul>
+<h3><span id="fang-wen-yuan-su"> 访问元素</span><a href="#fang-wen-yuan-su" class="header-anchor">#</a></h3>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">A =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 1 </span> <span class="number"> 2 </span>  3</span><br><span class="line">  <span class="number"> 4 </span> <span class="number"> 5 </span>  6</span><br><span class="line">  <span class="number"> 7 </span> <span class="number"> 8 </span>  9</span><br><span class="line">   </span><br><span class="line">&gt;&gt; A(2, 2) % 第二行，第二列，先定行再定列</span><br><span class="line">ans =  5</span><br></pre></td></tr></table></figure>
+<h3><span id="fang-wen-dan-xing-huo-dan-lie"> 访问单行或单列</span><a href="#fang-wen-dan-xing-huo-dan-lie" class="header-anchor">#</a></h3>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span> A(<span class="number">1</span>, <span class="symbol">:</span>) % 第一行，所有，元素</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">   </span><br><span class="line"><span class="meta">&gt;&gt;</span> A(<span class="symbol">:</span>, <span class="number">2</span>) % 第二列，所有，元素</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">2</span></span><br><span class="line">   <span class="number">5</span></span><br><span class="line">   <span class="number">8</span></span><br></pre></td></tr></table></figure>
+<h3><span id="fang-wen-duo-xing-huo-duo-lie"> 访问多行或多列</span><a href="#fang-wen-duo-xing-huo-duo-lie" class="header-anchor">#</a></h3>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A<span class="comment">(:, [1, 3]) % 第一列和第三列，所有，元素</span></span><br><span class="line"><span class="comment">ans =</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">   1   3</span></span><br><span class="line"><span class="comment">   4   6</span></span><br><span class="line"><span class="comment">   7   9</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&gt;&gt; A([1, 3], :)</span> % 第一行和第三行，所有，元素</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">   <span class="number">7</span>   <span class="number">8</span>   <span class="number">9</span></span><br></pre></td></tr></table></figure>
+<h2><span id="lian-jie"> 连接</span><a href="#lian-jie" class="header-anchor">#</a></h2>
+<ul>
+<li>C = [A B]，把B按列加到A上，生成C</li>
+<li>C = [A; B]，把B按行加到A上，生成C</li>
+</ul>
+<h3><span id="tian-jia-yuan-su"> 添加元素</span><a href="#tian-jia-yuan-su" class="header-anchor">#</a></h3>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1]</span><br><span class="line">A =  1</span><br><span class="line"></span><br><span class="line">&gt;&gt; A = [A, 2] % 把2，按列，添加到A上，再赋给A</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   1   2</span><br><span class="line">   </span><br><span class="line">&gt;&gt; A = [A; 3] % A有两列，3只有一列，规模不匹配</span><br><span class="line"><span class="keyword">error: </span>vertical dimensions mismatch (1x2 vs 1x1)</span><br></pre></td></tr></table></figure>
+<h3><span id="tian-jia-xing-huo-lie"> 添加行或列</span><a href="#tian-jia-xing-huo-lie" class="header-anchor">#</a></h3>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="keyword">A</span> = [<span class="keyword">A</span><span class="comment">; [3, 4]] % 将向量[3, 4]，作为行，添加到A上，在赋给A</span></span><br><span class="line"><span class="keyword">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line">   </span><br><span class="line">&gt;&gt; <span class="keyword">A</span> = [<span class="keyword">A</span>, [<span class="number">5</span><span class="comment">; 6]] % 将向量[5, 6]，作为列，添加到A上，在赋给A</span></span><br><span class="line"><span class="keyword">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span>   <span class="number">5</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span>   <span class="number">6</span></span><br></pre></td></tr></table></figure>
+<h3><span id="ju-zhen-lian-jie"> 矩阵连接</span><a href="#ju-zhen-lian-jie" class="header-anchor">#</a></h3>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1, 2; 3, 4]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 1 </span>  2</span><br><span class="line">  <span class="number"> 3 </span>  4</span><br><span class="line"></span><br><span class="line">&gt;&gt; B = [5, 6;<span class="number"> 7 </span>,8]</span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 5 </span>  6</span><br><span class="line">  <span class="number"> 7 </span>  8</span><br><span class="line"></span><br><span class="line">&gt;&gt; [A; B] % 将B，作为行，添加到A上</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 1 </span>  2</span><br><span class="line">  <span class="number"> 3 </span>  4</span><br><span class="line">  <span class="number"> 5 </span>  6</span><br><span class="line">  <span class="number"> 7 </span>  8</span><br></pre></td></tr></table></figure>
+<h2><span id="suo-you-de-shu-ju-fang-ru-yi-ge-xiang-liang-zhong"> 所有的数据放入一个向量中</span><a href="#suo-you-de-shu-ju-fang-ru-yi-ge-xiang-liang-zhong" class="header-anchor">#</a></h2>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; A<span class="comment">(:)</span></span><br><span class="line"><span class="comment">ans =</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">   1</span></span><br><span class="line"><span class="comment">   3</span></span><br><span class="line"><span class="comment">   2</span></span><br><span class="line"><span class="comment">   4</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&gt;&gt; A(:)</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">ans =</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   1   3   2   4</span></span><br></pre></td></tr></table></figure>
+<h1><span id="fu-zhi"> 赋值</span><a href="#fu-zhi" class="header-anchor">#</a></h1>
+<ul>
+<li>在访问基础上，给定相同规模的数据</li>
+</ul>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">A =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 1 </span> <span class="number"> 2 </span>  3</span><br><span class="line">  <span class="number"> 4 </span> <span class="number"> 5 </span>  6</span><br><span class="line">  <span class="number"> 7 </span> <span class="number"> 8 </span>  9</span><br><span class="line"></span><br><span class="line">&gt;&gt; A(3, 3) =<span class="number"> 10 </span>% 修改单个元素的值</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number"> 1 </span>  <span class="number"> 2 </span>   3</span><br><span class="line">   <span class="number"> 4 </span>  <span class="number"> 5 </span>   6</span><br><span class="line">   <span class="number"> 7 </span>  <span class="number"> 8 </span>  10</span><br><span class="line"></span><br><span class="line">&gt;&gt; A(1, :) = [0, 0, 0] % 修改一行的值</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number"> 0 </span>  <span class="number"> 0 </span>   0</span><br><span class="line">   <span class="number"> 4 </span>  <span class="number"> 5 </span>   6</span><br><span class="line">   <span class="number"> 7 </span>  <span class="number"> 8 </span>  10</span><br><span class="line"></span><br><span class="line">&gt;&gt; A(2:3, 2:3)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number"> 5 </span>   6</span><br><span class="line">   <span class="number"> 8 </span>  10</span><br><span class="line"></span><br><span class="line">&gt;&gt; A(2:3, 2:3) = [0, 0; 0, 0] % 修改指定矩阵的值</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 0 </span> <span class="number"> 0 </span>  0</span><br><span class="line">  <span class="number"> 4 </span> <span class="number"> 0 </span>  0</span><br><span class="line">  <span class="number"> 7 </span> <span class="number"> 0 </span>  0</span><br></pre></td></tr></table></figure>
+<h1><span id="yun-suan"> 运算</span><a href="#yun-suan" class="header-anchor">#</a></h1>
+<h2><span id="jia-jian"> 加，减</span><a href="#jia-jian" class="header-anchor">#</a></h2>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span> A = [<span class="number">1</span> <span class="number">1</span>; <span class="number">1</span> <span class="number">1</span>]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">1</span></span><br><span class="line">   <span class="number">1</span>   <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span> B = [<span class="number">2</span> <span class="number">2</span>; <span class="number">2</span> <span class="number">2</span>]</span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">   <span class="number">2</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">2</span>   <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span> A + B</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">3</span>   <span class="number">3</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span> A - B</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  -<span class="number">1</span>  -<span class="number">1</span></span><br><span class="line">  -<span class="number">1</span>  -<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span> A - <span class="number">1</span></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  <span class="number">0</span>  <span class="number">0</span></span><br><span class="line">  <span class="number">0</span>  <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h2><span id="xiang-cheng"> 相乘</span><a href="#xiang-cheng" class="header-anchor">#</a></h2>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [<span class="number">1</span> <span class="number">2</span><span class="comment">; 3 4]</span></span><br><span class="line"><span class="attribute">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; B = [<span class="number">5</span> <span class="number">6</span><span class="comment">; 7 8]</span></span><br><span class="line"><span class="attribute">B</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">5</span>   <span class="number">6</span></span><br><span class="line">   <span class="number">7</span>   <span class="number">8</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; A * B</span><br><span class="line"><span class="attribute">ans</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">19</span>   <span class="number">22</span></span><br><span class="line">   <span class="number">43</span>   <span class="number">50</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; -A % -<span class="number">1</span> * A</span><br><span class="line"><span class="attribute">ans</span> =</span><br><span class="line"></span><br><span class="line">  -<span class="number">1</span>  -<span class="number">2</span></span><br><span class="line">  -<span class="number">3</span>  -<span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h2><span id="dian-yun-suan"> 点运算</span><a href="#dian-yun-suan" class="header-anchor">#</a></h2>
+<p>对应元素运算</p>
+<ul>
+<li>维度相同：对应元素相乘</li>
+<li>行维度相同：每行对应元素相乘</li>
+<li>列维度相同：每列对应元素相乘</li>
+<li>A .* B = B .* A</li>
+<li>乘 *；除 /; 平方 ^；等</li>
+</ul>
+<h3><span id="wei-du-xiang-tong"> 维度相同</span><a href="#wei-du-xiang-tong" class="header-anchor">#</a></h3>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">1</span></span><br><span class="line">   <span class="number">1</span>   <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">B</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; A .* B</span><br><span class="line"><span class="attribute">ans</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">   <span class="number">2</span>   <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h3><span id="xing-wei-du-xiang-tong"> 行维度相同</span><a href="#xing-wei-du-xiang-tong" class="header-anchor">#</a></h3>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">1</span></span><br><span class="line">   <span class="number">1</span>   <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">B</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">5</span>   <span class="number">6</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; A .* B</span><br><span class="line"><span class="attribute">ans</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">5</span>   <span class="number">6</span></span><br><span class="line">   <span class="number">5</span>   <span class="number">6</span></span><br></pre></td></tr></table></figure>
+<h3><span id="lie-wei-du-xiang-tong"> 列维度相同</span><a href="#lie-wei-du-xiang-tong" class="header-anchor">#</a></h3>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">1</span></span><br><span class="line">   <span class="number">1</span>   <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">B</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">5</span></span><br><span class="line">   <span class="number">6</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; A .* B</span><br><span class="line"><span class="attribute">ans</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">5</span>   <span class="number">5</span></span><br><span class="line">   <span class="number">6</span>   <span class="number">6</span></span><br></pre></td></tr></table></figure>
+<h3><span id="dian-chu"> 点除</span><a href="#dian-chu" class="header-anchor">#</a></h3>
+<ul>
+<li>矩阵乘以常数，A * 2，除可以是，A / 2</li>
+<li>反过来，2 * A没问题，2 / A 就不行，要用2 ./ A</li>
+</ul>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="number">1</span> ./ <span class="keyword">A</span></span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">1.00000</span>   <span class="number">0.50000</span></span><br><span class="line">   <span class="number">0.33333</span>   <span class="number">0.25000</span></span><br></pre></td></tr></table></figure>
+<h2><span id="luo-ji"> 逻辑</span><a href="#luo-ji" class="header-anchor">#</a></h2>
+<ul>
+<li>每一个元素做比较，标记0或1</li>
+<li>&amp;gt, &lt;, ==, !=（或~=）, &amp;&amp;, ||</li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; A &gt; <span class="number">2</span></span><br><span class="line"><span class="attribute">ans</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">0</span>   <span class="number">0</span></span><br><span class="line">   <span class="number">1</span>   <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h2><span id="wei-yun-suan"> 位运算</span><a href="#wei-yun-suan" class="header-anchor">#</a></h2>
+<ul>
+<li>或 | ，函数xor</li>
+<li>且 &amp;</li>
+<li>非 ~</li>
+<li>异或 ^</li>
+</ul>
+<h1><span id="kong-zhi-yu-ju"> 控制语句</span><a href="#kong-zhi-yu-ju" class="header-anchor">#</a></h1>
+<h2><span id="if"> if</span><a href="#if" class="header-anchor">#</a></h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">i =  1</span><br><span class="line">&gt;&gt; if i == 1</span><br><span class="line">&gt;     disp(1)</span><br><span class="line">&gt;  elseif i == 2</span><br><span class="line">&gt;     disp(2)</span><br><span class="line">&gt;  else</span><br><span class="line">&gt;     disp(3)</span><br><span class="line">&gt;  end</span><br></pre></td></tr></table></figure>
+<h2><span id="for"> for</span><a href="#for" class="header-anchor">#</a></h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; for i = 1:3 % 从1到3</span><br><span class="line">&gt;     disp(i)</span><br><span class="line">&gt;  end</span><br><span class="line"> 1</span><br><span class="line"> 2</span><br><span class="line"> 3</span><br></pre></td></tr></table></figure>
+<h2><span id="while"> while</span><a href="#while" class="header-anchor">#</a></h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; while i &lt;= 3</span><br><span class="line">&gt;     disp(i)</span><br><span class="line">&gt;     i = i + 1</span><br><span class="line">&gt;  end</span><br><span class="line"> 1</span><br><span class="line"> 2</span><br><span class="line"> 3</span><br></pre></td></tr></table></figure>
+<h2><span id="break-continue"> break，continue</span><a href="#break-continue" class="header-anchor">#</a></h2>
+<p>与C、C++、Java没有区别</p>
+<h1><span id="han-shu"> 函数</span><a href="#han-shu" class="header-anchor">#</a></h1>
+<ul>
+<li>size：获取矩阵维度</li>
+<li>length：获取最大维度</li>
+<li>who：变量列表</li>
+<li>whos：变量详情</li>
+<li>clear 变量名：删除指定变量</li>
+<li>clear：删除所有变量</li>
+<li>find：返回符合条件元素的下标</li>
+<li>log：log以e为底</li>
+<li>exp：e的多少次方</li>
+<li>abs：绝对值</li>
+<li>floor：向下取整</li>
+<li>ceil：向上取整</li>
+<li>sum：求和</li>
+<li>prop：求积</li>
+</ul>
+<h2><span id="size"> size</span><a href="#size" class="header-anchor">#</a></h2>
+<ul>
+<li>获取矩阵维度</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line">   <span class="number">5</span>   <span class="number">6</span></span><br><span class="line">&gt;&gt; aSize = <span class="built_in">size</span>(A)</span><br><span class="line">aSize =</span><br><span class="line"></span><br><span class="line">   <span class="number">3</span>   <span class="number">2</span></span><br><span class="line">   </span><br><span class="line">&gt;&gt; <span class="built_in">size</span>(A, <span class="number">1</span>) <span class="comment">% 3行</span></span><br><span class="line"><span class="built_in">ans</span> =  <span class="number">3</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="built_in">size</span>(A, <span class="number">2</span>) <span class="comment">% 2列</span></span><br><span class="line"><span class="built_in">ans</span> =  <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h2><span id="length"> length</span><a href="#length" class="header-anchor">#</a></h2>
+<ul>
+<li>获取最大维度</li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line">   <span class="number">5</span>   <span class="number">6</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; length(A) % 输出最大维度</span><br><span class="line"><span class="attribute">ans</span> =  <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h2><span id="who"> who</span><a href="#who" class="header-anchor">#</a></h2>
+<p>变量列表</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; who % 现在都有哪里变量</span><br><span class="line"><span class="keyword">Variables</span> in <span class="comment">the current scope:</span></span><br><span class="line"></span><br><span class="line">A          <span class="comment">aSize      ans        featuresX  w</span></span><br></pre></td></tr></table></figure>
+<h2><span id="whos"> whos</span><a href="#whos" class="header-anchor">#</a></h2>
+<p>变量详情</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; whos % 变量详情</span><br><span class="line"><span class="keyword">Variables</span> in <span class="comment">the current scope:</span></span><br><span class="line"></span><br><span class="line">   Attr <span class="comment">Name           Size                     Bytes  Class</span></span><br><span class="line">   ==== ====           ====                     =====  =====</span><br><span class="line">        A              <span class="comment">3x2                         48  double</span></span><br><span class="line">        aSize          <span class="comment">1x2                         16  double</span></span><br><span class="line">        ans            <span class="comment">1x20                        20  char</span></span><br><span class="line">        featuresX     <span class="comment">27x2                        432  double</span></span><br><span class="line">        w              <span class="comment">1x10000                  80000  double</span></span><br><span class="line"></span><br><span class="line">Total <span class="comment">is 10082 elements using 80516 bytes</span></span><br></pre></td></tr></table></figure>
+<h2><span id="clear"> clear</span><a href="#clear" class="header-anchor">#</a></h2>
+<p>删除变量</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span> clear featuresX</span><br><span class="line"><span class="meta">&gt;&gt;</span> who</span><br><span class="line">Variables <span class="keyword">in</span> the current <span class="symbol">scope:</span></span><br><span class="line"></span><br><span class="line">A      aSize  ans    w</span><br><span class="line"><span class="meta">&gt;&gt;</span> clear % 清除全部变量</span><br><span class="line"><span class="meta">&gt;&gt;</span> who % 一个变量都没有了</span><br></pre></td></tr></table></figure>
+<h2><span id="find"> find</span><a href="#find" class="header-anchor">#</a></h2>
+<ul>
+<li>返回符合条件元素的下标</li>
+</ul>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">A =</span><br><span class="line"></span><br><span class="line">   5   6</span><br><span class="line">   7   8</span><br><span class="line"></span><br><span class="line">&gt;&gt; [r, c] = find(A &gt; 6) % 符合要求的是：第二行第一个和第二行第二个</span><br><span class="line">r =</span><br><span class="line"></span><br><span class="line">   2</span><br><span class="line">   2</span><br><span class="line"></span><br><span class="line">c =</span><br><span class="line"></span><br><span class="line">   1</span><br><span class="line">   2</span><br></pre></td></tr></table></figure>
+<h2><span id="sum"> sum</span><a href="#sum" class="header-anchor">#</a></h2>
+<p>求和</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span> A = [<span class="number">1</span>, <span class="number">2</span>; <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span> sum(A) % 等效：sum(A, <span class="number">1</span>)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">4</span>   <span class="number">6</span></span><br><span class="line">   </span><br><span class="line"><span class="meta">&gt;&gt;</span> sum(A, <span class="number">2</span>)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">3</span></span><br><span class="line">   <span class="number">7</span></span><br></pre></td></tr></table></figure>
+<h2><span id="prod"> prod</span><a href="#prod" class="header-anchor">#</a></h2>
+<p>求积</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span> A</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span> prod(A) % 等效：prod(A, <span class="number">1</span>)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">3</span>   <span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span> prod(A, <span class="number">2</span>)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    <span class="number">2</span></span><br><span class="line">   <span class="number">12</span></span><br></pre></td></tr></table></figure>
+<h2><span id="max"> max</span><a href="#max" class="header-anchor">#</a></h2>
+<h3><span id="xiang-liang"> 向量</span><a href="#xiang-liang" class="header-anchor">#</a></h3>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span> a = [<span class="number">1</span> <span class="number">5</span> <span class="number">2</span> <span class="number">3.3</span>]</span><br><span class="line">a =</span><br><span class="line"></span><br><span class="line">   <span class="number">1.0000</span>   <span class="number">5.0000</span>   <span class="number">2.0000</span>   <span class="number">3.3000</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span> max(a)</span><br><span class="line">ans =  <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span> [val, ind] = max(a)</span><br><span class="line">val =  <span class="number">5</span></span><br><span class="line">ind =  <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h3><span id="ju-zhen-bi-jiao"> 矩阵比较</span><a href="#ju-zhen-bi-jiao" class="header-anchor">#</a></h3>
+<p>两个矩阵比较每个元素，保留大的</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="keyword">A</span> = rand(<span class="number">3</span>)</span><br><span class="line"><span class="keyword">A</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">0.2620788</span>   <span class="number">0.6346345</span>   <span class="number">0.4659161</span></span><br><span class="line">   <span class="number">0.0880455</span>   <span class="number">0.1258945</span>   <span class="number">0.0079559</span></span><br><span class="line">   <span class="number">0.0296765</span>   <span class="number">0.7917592</span>   <span class="number">0.4321800</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; B = rand(<span class="number">3</span>)</span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">   <span class="number">0.039237</span>   <span class="number">0.672424</span>   <span class="number">0.214649</span></span><br><span class="line">   <span class="number">0.491320</span>   <span class="number">0.362929</span>   <span class="number">0.197626</span></span><br><span class="line">   <span class="number">0.821090</span>   <span class="number">0.675265</span>   <span class="number">0.698960</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; max(<span class="keyword">A</span>, B)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   <span class="number">0.26208</span>   <span class="number">0.67242</span>   <span class="number">0.46592</span></span><br><span class="line">   <span class="number">0.49132</span>   <span class="number">0.36293</span>   <span class="number">0.19763</span></span><br><span class="line">   <span class="number">0.82109</span>   <span class="number">0.79176</span>   <span class="number">0.69896</span></span><br></pre></td></tr></table></figure>
+<h3><span id="xing-yu-lie-de-zui-da-zhi"> 行与列的最大值</span><a href="#xing-yu-lie-de-zui-da-zhi" class="header-anchor">#</a></h3>
+<p>参数二：与之比较的矩阵<br>
+参数三：按行还是按列</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [<span class="number">1</span> <span class="number">2</span>; <span class="number">3</span> <span class="number">4</span>]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   <span class="number">1</span>   <span class="number">2</span></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="built_in">max</span>(A) <span class="comment">% 每列最大值</span></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="built_in">max</span>(A, [], <span class="number">1</span>) <span class="comment">% 每列最大值</span></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">3</span>   <span class="number">4</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="built_in">max</span>(A, [], <span class="number">2</span>) <span class="comment">% 每行最大值</span></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"></span><br><span class="line">   <span class="number">2</span></span><br><span class="line">   <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h3><span id="randperm"> randperm</span><a href="#randperm" class="header-anchor">#</a></h3>
+<p>生成乱序序列</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [2, 3,<span class="number"> 4 </span>,5 ,6]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 2 </span> <span class="number"> 3 </span> <span class="number"> 4 </span> <span class="number"> 5 </span>  6</span><br><span class="line">&gt;&gt; rand_indices = randperm(length(A))</span><br><span class="line">rand_indices =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 1 </span> <span class="number"> 2 </span> <span class="number"> 4 </span> <span class="number"> 5 </span>  3</span><br><span class="line">&gt;&gt; A(:, rand_indices(1:3))</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  <span class="number"> 5 </span> <span class="number"> 6 </span>  2</span><br></pre></td></tr></table></figure>
+<h1><span id="zi-ding-yi-han-shu"> 自定义函数</span><a href="#zi-ding-yi-han-shu" class="header-anchor">#</a></h1>
+<h2><span id="chuang-jian-bu-zou"> 创建步骤</span><a href="#chuang-jian-bu-zou" class="header-anchor">#</a></h2>
+<ul>
+<li>创建存放函数的文件（文件名要与函数名相同，.m结尾）</li>
+</ul>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">square</span>.m</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建函数</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 一个返回值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> 返回值 = 函数名<span class="params">(参数列表)</span></span></span><br><span class="line">    函数体</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 多个返回值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[返回值1, 返回值2]</span> = 函数名<span class="params">(参数列表)</span></span></span><br><span class="line">    函数体</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">y</span> = <span class="title">square</span><span class="params">(x)</span></span></span><br><span class="line">  y = x^<span class="number">2</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[y1, y2]</span> = <span class="title">squareAndCube</span><span class="params">(x)</span></span></span><br><span class="line">  y1 = x^<span class="number">2</span>;</span><br><span class="line">  y2 = x^<span class="number">3</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2><span id="diao-yong"> 调用</span><a href="#diao-yong" class="header-anchor">#</a></h2>
+<ul>
+<li>进入到存放函数文件的目录</li>
+<li>添加存放函数文件的目录，到，搜索路径</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span> cd Downloads/ % 进入存放函数文件的目录</span><br><span class="line"><span class="meta">&gt;&gt;</span> square(<span class="number">2</span>)</span><br><span class="line">ans =  <span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span> addpath(<span class="string">&#x27;~/Downloads&#x27;</span>) % 添加到搜索路径</span><br><span class="line"><span class="meta">&gt;&gt;</span> cd ..</span><br><span class="line"><span class="meta">&gt;&gt;</span> square(<span class="number">2</span>)</span><br><span class="line">ans =  <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h1><span id="shu-ju"> 数据</span><a href="#shu-ju" class="header-anchor">#</a></h1>
+<h2><span id="lu-jing"> 路径</span><a href="#lu-jing" class="header-anchor">#</a></h2>
+<p>与Linux命令一样</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="keyword">pwd</span> % 当前路径</span><br><span class="line">ans = <span class="string">/Users/XXX</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="keyword">cd</span> ~<span class="string">/Developer</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="keyword">pwd</span></span><br><span class="line">ans = <span class="string">/Users/XXX/Developer</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="keyword">ls</span> % 列出目录文件和文件夹</span><br><span class="line"></span><br><span class="line">&gt;&gt; <span class="keyword">cd</span> <span class="string">..</span> % 回到上级目录</span><br></pre></td></tr></table></figure>
+<h2><span id="zai-ru-yu-bao-cun"> 载入与保存</span><a href="#zai-ru-yu-bao-cun" class="header-anchor">#</a></h2>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span> load featuresX.dat % 载入数据，变量名为featuresX</span><br><span class="line"><span class="meta">&gt;&gt;</span> data = load(<span class="string">&#x27;ex1data1.txt&#x27;</span>); % 变量名为data</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;</span> save featuresX.mat featuresX; % 将featuresX中的数据保存到featuresX文件中</span><br><span class="line"><span class="meta">&gt;&gt;</span> save hello.txt v -ascii % 将变量v中得数据已ascii编码方式保存到hello.txt中</span><br></pre></td></tr></table></figure>
+<h1><span id="qi-ta"> 其他</span><a href="#qi-ta" class="header-anchor">#</a></h1>
+<h2><span id="ming-ling"> 命令</span><a href="#ming-ling" class="header-anchor">#</a></h2>
+<ul>
+<li>简化命令行：PS1(’&gt;&gt; ');</li>
+<li>关闭图表：close或close all</li>
+<li>命令行清屏：clc</li>
+</ul>
+<h2><span id="zhu-shi"> 注释</span><a href="#zhu-shi" class="header-anchor">#</a></h2>
+<p>%后为注释</p>
+<h2><span id="da-yin"> 打印</span><a href="#da-yin" class="header-anchor">#</a></h2>
+<h3><span id="zi-dong-da-yin"> 自动打印</span><a href="#zi-dong-da-yin" class="header-anchor">#</a></h3>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">a</span> = <span class="number">3</span> % 会打印数据</span><br><span class="line"><span class="attribute">a</span> = <span class="number">3</span><span class="comment">; % 不会打印数据，分号可以防止输出</span></span><br></pre></td></tr></table></figure>
+<h3><span id="ge-shi-hua"> 格式化</span><a href="#ge-shi-hua" class="header-anchor">#</a></h3>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">disp</span>(<span class="built_in">pi</span>) <span class="comment">% 输出：3.1416</span></span><br><span class="line"><span class="built_in">disp</span>(sprintf(<span class="string">&#x27;pi is %.2f&#x27;</span>, <span class="built_in">pi</span>)) <span class="comment">% c语言风格</span></span><br></pre></td></tr></table></figure>
+<h3><span id="mo-ren-ge-shi"> 默认格式</span><a href="#mo-ren-ge-shi" class="header-anchor">#</a></h3>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">format</span> <span class="keyword">long</span> % 修改默认打印格式</span><br></pre></td></tr></table></figure>
+<h2><span id="bang-zhu"> 帮助</span><a href="#bang-zhu" class="header-anchor">#</a></h2>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">help</span> <span class="keyword">size</span> % 查看<span class="keyword">size</span>函数的帮助文档</span><br><span class="line"><span class="keyword">help</span> <span class="keyword">help</span> % 查看<span class="keyword">help</span>函数的帮助文档</span><br></pre></td></tr></table></figure>
+<h1><span id="tu"> 图</span><a href="#tu" class="header-anchor">#</a></h1>
+<h2><span id="plot"> plot</span><a href="#plot" class="header-anchor">#</a></h2>
+<h3><span id="shu-xing"> 属性</span><a href="#shu-xing" class="header-anchor">#</a></h3>
+<ul>
+<li>LineWidth：线宽</li>
+<li>MarkerFaceColor：标记颜色</li>
+<li>MarkerSize：标记大小</li>
+</ul>
+<h3><span id="x-y-zhou"> x，y轴</span><a href="#x-y-zhou" class="header-anchor">#</a></h3>
+<p>ylabel(‘x’);<br>
+xlabel(‘y’);</p>
+<h2><span id="zhi-fang-tu"> 直方图</span><a href="#zhi-fang-tu" class="header-anchor">#</a></h2>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span> w = -<span class="number">6</span> + sqrt(<span class="number">10</span>)*randn(<span class="number">1</span>, <span class="number">10000</span>);</span><br><span class="line">&gt;&gt; hist(w)</span><br><span class="line"><span class="meta">&gt;&gt;</span> hist(w, <span class="number">30</span>) % <span class="number">30</span>组</span><br></pre></td></tr></table></figure>
+<p>转载自：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004204177">Octave语法</a></li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Lucas-Zh</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://exlucas1.github.io/2021/11/21/Octave-Grammar/">http://exlucas1.github.io/2021/11/21/Octave-Grammar/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2021 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><i class="iconfont icon-tags "></i> 机器学习</a>
+                    
+                        <a href="/tags/Octave/"><i class="iconfont icon-tags "></i> Octave</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();"><i class="iconfont icon-back"></i> Back</a>
+                <span>· </span>
+                <a href="/"><i class="iconfont icon-home"></i> Home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/11/21/Ml_Thirdweek/">吴恩达机器学习-第[3]周</a>
+            
+        </section>
+        <br>
+        
+            <section id="comments" class="comments">
+              <style>
+                  .comments{ margin-top: 30px;}
+                  .v .vlist .vcard .vcontent {padding-top: 0;}
+                  .vcontent p { color:grey; margin-bottom: 10px;}
+                  .v * {line-height: normal;}
+                  .v .vwrap  {border-radius: 0px; padding: 10px;}
+                  .v .vbtn {border-radius: 0px;}
+                  .v code, .v pre {border-radius: 0px;}
+                  .v .vlist .vcard .vhead .vsys {border-radius: 1px; padding: 2px;}
+                  .v .vlist .vcard .vhead .vnick {color: #2d96bd;}
+                  .v .vlist .vcard .vh .vmeta .vat{color: #c7254e;}
+                  .v .vlist .vcard {padding-top: 0;}
+                  .v .vlist .vcard .vimg { width: 2.5em; height: 2.5em; }
+                  .v .vlist .vcard .vquote .vimg { width: 2.5em; height: 2.5em; }
+              </style>
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '.valine_comment',
+        app_id: 'LI3918a02QlTElzicqpsV25J-gzGzoHsz',
+        app_key: 'VH5QibEbLcCyjfR1cAAflXuY',
+        placeholder: 'You can comment here.',
+        notify: 'true',
+        verify: 'true',
+        avatar: 'retro',
+        visitor: 'true'
+    });
+</script>
+            </section>
+        
+
+    </article>
+    
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>
+            <i class="iconfont icon-beianxinxi"></i><a href="https://beian.miit.gov.cn" target="_blank">闽ICP备2021017013号</a>
+            
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-user1"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-eye1"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
