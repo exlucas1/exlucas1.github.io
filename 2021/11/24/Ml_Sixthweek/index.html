@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Lucas-Zh">
+
+
+
+
+
+<title>吴恩达机器学习-第[6]周 | lucas-zh&#39;s site</title>
+
+
+
+    <link rel="icon" href="/image/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2932977_ej31m7kjca7.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="lucas-zh's site" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Lucas-Zh&#39;s Site</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categories "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Lucas-Zh&#39;s Site</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categories "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">吴恩达机器学习-第[6]周</h1>
+            
+                <div class="post-meta">
+                    
+                        <i class="iconfont icon-user"></i>
+                        <a itemprop="author" rel="author" href="/">Lucas-Zh</a> &nbsp;
+                    
+
+                    
+                        <span class="post-time">
+                            <i class="iconfont icon-time"></i>
+                            <a href="#">November 24, 2021&nbsp;&nbsp;22:07:11</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/Coursera-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">Coursera-机器学习</a>&nbsp;
+                            
+                        </span>
+                        <span id="/2021/11/24/Ml_Sixthweek/" class="leancloud-visitors view" data-flag-title="吴恩达机器学习-第[6]周">
+                            <em class="post-meta-item-text"><i class="iconfont icon-eye"></i></em>
+                            <i class="leancloud-visitors-count">loading</i>
+                          </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <div class="toc">
+<!-- toc -->
+<ul>
+<li><a href="#advice-for-applying-machine-learning-ji-qi-xue-xi-ying-yong-jian-yi">Advice for applying machine learning 机器学习应用建议</a>
+<ul>
+<li><a href="#deciding-what-to-try-next">Deciding What to Try Next</a></li>
+<li><a href="#evaluating-a-hypothesis-ping-gu-yi-ge-jia-she">Evaluating a Hypothesis 评估一个假设</a></li>
+<li><a href="#model-selection-and-train-validation-test-sets-mo-xing-xuan-ze-he-xun-lian-yan-zheng-ce-shi-ji">Model Selection and Train/Validation/Test Sets 模型选择 和 &quot;训练/验证/测试&quot;集</a></li>
+<li><a href="#diagnosing-bias-vs-variance-jian-yan-wu-chai-he-fang-chai">Diagnosing bias vs. variance 检验误差和方差</a></li>
+<li><a href="#regularization-and-bias-variance-zheng-ze-hua-he-pian-chai-fang-chai">Regularization and Bias/Variance 正则化 和 偏差/方差</a></li>
+<li><a href="#learning-curves-xue-xi-qu-xian">Learning Curves 学习曲线</a></li>
+<li><a href="#deciding-what-to-do-next-revisited">Deciding What to Do Next Revisited</a></li>
+<li><a href="#guan-yu-pian-chai-he-fang-chai">关于偏差和方差</a></li>
+</ul>
+</li>
+<li><a href="#machine-learning-system-design-ji-qi-xue-xi-xi-tong-she-ji">Machine Learning System Design 机器学习系统设计</a>
+<ul>
+<li><a href="#prioritizing-what-to-work-on-spam-classification-example">Prioritizing What to Work On：Spam classification example</a></li>
+<li><a href="#error-analysis-wu-chai-fen-xi">Error Analysis 误差分析</a></li>
+<li><a href="#error-metrics-for-skewed-classes-lei-pian-xie-de-wu-chai-du-liang">Error Metrics for Skewed Classes 类偏斜的误差度量</a></li>
+<li><a href="#trading-off-precision-and-recall-cha-zhun-lu-he-cha-quan-lu-zhi-jian-de-quan-heng">Trading Off Precision and Recall 查准率和查全率之间的权衡</a></li>
+<li><a href="#data-for-machine-learning-shu-ju-ji-da-xiao">Data For Machine Learning 数据集大小</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+</div>
+<h2><span id="advice-for-applying-machine-learning-ji-qi-xue-xi-ying-yong-jian-yi"> Advice for applying machine learning 机器学习应用建议</span><a href="#advice-for-applying-machine-learning-ji-qi-xue-xi-ying-yong-jian-yi" class="header-anchor">#</a></h2>
+<h3><span id="deciding-what-to-try-next"> Deciding What to Try Next</span><a href="#deciding-what-to-try-next" class="header-anchor">#</a></h3>
+<blockquote>
+<p>有多种方案：</p>
+<p>1、获得更多训练数据；</p>
+<p>2、尝试更少特征；</p>
+<p>3、尝试更多特征；</p>
+<p>4、尝试添加多项式特征；</p>
+<p>5、减小 λ；</p>
+<p>6、增大 λ</p>
+<img src="/2021/11/24/Ml_Sixthweek/1.png" alt="img" style="zoom:50%;">
+<p>为了避免一个方案一个方案的尝试，可以通过评估机器学习算法的性能，来进行调试。</p>
+<p><strong>机器学习诊断法 Machine learning diagnostic</strong> 的定义：</p>
+<img src="/2021/11/24/Ml_Sixthweek/2.png" alt="img" style="zoom:50%;">
+</blockquote>
+<h3><span id="evaluating-a-hypothesis-ping-gu-yi-ge-jia-she"> Evaluating a Hypothesis 评估一个假设</span><a href="#evaluating-a-hypothesis-ping-gu-yi-ge-jia-she" class="header-anchor">#</a></h3>
+<blockquote>
+<p>想要评估一个算法是否过拟合</p>
+<img src="/2021/11/24/Ml_Sixthweek/3.png" alt="img" style="zoom:50%;">
+<p>（一）首先，划分测试集和训练集</p>
+<p>如果数据已经随机分布了， 可以选择前70%数据作为训练集，剩下的30%作为测试集；</p>
+<p>如果数据不是随机分布的，最好先打乱，或者随机选择70%数据作为训练集，剩下的30%作为测试集</p>
+<img src="/2021/11/24/Ml_Sixthweek/4.png" alt="img" style="zoom:50%;">
+<p>（二）然后，计算测试误差</p>
+<p>1、对于回归问题。例如线性回归。首先使用训练集进行训练，然后使用测试集计算测试误差：</p>
+<img src="/2021/11/24/Ml_Sixthweek/5.png" alt="img" style="zoom:50%;">
+<p>2、对于分类问题。例如逻辑回归，也是一样的：</p>
+<img src="/2021/11/24/Ml_Sixthweek/6.png" alt="img" style="zoom:50%;">
+<p>有一种更易理解的测试误差定义方式，叫做 <strong>错分率 Misclassification error</strong> (也叫0/1错分率)：</p>
+<img src="/2021/11/24/Ml_Sixthweek/7.png" alt="img" style="zoom:50%;">
+<p>err(<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>h</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h_θ(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>,y) 的意思是：如果分类预测结果 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>h</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h_θ(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> 错误，则 err 值为1；如果 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>h</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">h_θ(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> 预测正确，则 err 值为0。  整体的测试误差就是所有 err 值的加和。</p>
+</blockquote>
+<h3><span id="model-selection-and-train-validation-test-sets-mo-xing-xuan-ze-he-quot-xun-lian-yan-zheng-ce-shi-quot-ji"> Model Selection and Train/Validation/Test Sets 模型选择 和 &quot;训练/验证/测试&quot;集</span><a href="#model-selection-and-train-validation-test-sets-mo-xing-xuan-ze-he-quot-xun-lian-yan-zheng-ce-shi-quot-ji" class="header-anchor">#</a></h3>
+<blockquote>
+<p>产生过拟合的一个原因是：仅仅在测试集合上调试 θ 得到的训练误差，通常不能作为对实际泛化误差的一个好的估测。</p>
+ <img src="/2021/11/24/Ml_Sixthweek/8.png" alt="img" style="zoom:50%;">
+<p>那么究竟应该选择几次多项式来作为我们的模型呢？</p>
+<p>假设针对 x 有10个模型：一次方程 直到 十次方程。对每个多项式，在训练集上训练出 θ 。然后分别使用 test 集合计算误差，分别得到$ J_{test}(θ<sup>{(1)})$,…$J_{test}(θ</sup>{(10)})<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">，</mi><mi mathvariant="normal">发</mi><mi mathvariant="normal">现</mi><mi mathvariant="normal">的</mi></mrow><annotation encoding="application/x-tex">，发现 的</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">发</span><span class="mord cjk_fallback">现</span><span class="mord cjk_fallback">的</span></span></span></span>J_{test}(θ^{(5)})$值最小，因此选择 d=5 这个模型。<br>
+<img src="/2021/11/24/Ml_Sixthweek/9.png" alt="img" style="zoom:50%;"></p>
+<p>但这里有个问题：我们选的这个模型，就是能够最好地拟合测试集的参数d的值及多项式的度。因此，再使用同样的测试集来评价假设，显然很不公平，很可能导致过拟合。</p>
+<p>所以，我们改为将数据集分为 6:2:2 三部分：training set、cross validation set(cv, 或者直接简称validation set)、test set</p>
+<img src="/2021/11/24/Ml_Sixthweek/10.png" alt="img" style="zoom:50%;">
+<p>每个集合上的误差计算公式：</p>
+<img src="/2021/11/24/Ml_Sixthweek/11.png" alt="img" style="zoom:50%;">
+<p>现在我们是用 cv 集合计算误差，分别得到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mrow><mi>c</mi><mi>v</mi></mrow></msub><mo stretchy="false">(</mo><msup><mi>θ</mi><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">J_{cv}(θ^{(1)})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>,…<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mrow><mi>c</mi><mi>v</mi></mrow></msub><mo stretchy="false">(</mo><msup><mi>θ</mi><mrow><mo stretchy="false">(</mo><mn>10</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">J_{cv}(θ^{(10)})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">1</span><span class="mord mtight">0</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，发现<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mrow><mi>c</mi><mi>v</mi></mrow></msub><mo stretchy="false">(</mo><msup><mi>θ</mi><mrow><mo stretchy="false">(</mo><mn>4</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">J_{cv}(θ^{(4)})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">4</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>的值最小，因此选择 d=4 这个模型，最后在 test 集合上进行预测，能得到一个更理想的泛化误差。</p>
+<img src="/2021/11/24/Ml_Sixthweek/12.png" alt="img" style="zoom:50%;">
+</blockquote>
+<h3><span id="diagnosing-bias-vs-variance-jian-yan-wu-chai-he-fang-chai"> Diagnosing bias vs. variance 检验误差和方差</span><a href="#diagnosing-bias-vs-variance-jian-yan-wu-chai-he-fang-chai" class="header-anchor">#</a></h3>
+<blockquote>
+<p>模型表现不好，通常有两种情况：</p>
+<p>(1) 误差 bias 过大，导致欠拟合 underfitting；</p>
+<p>(2) 方差 variance 过大，导致过拟合 overfitting</p>
+<img src="/2021/11/24/Ml_Sixthweek/13.png" alt="img" style="zoom: 67%;">
+<p>使用多项式的度 d 作为横轴，在训练集和cv集上分别计算 J(θ)，得到曲线：</p>
+ <img src="/2021/11/24/Ml_Sixthweek/14.png" alt="img" style="zoom: 67%;">
+<p>下面说如何根据两条曲线判断模型是高误差(欠拟合)、还是高方差(过拟合)。</p>
+<p>(1) 先看曲线左边，当 d=1 ，训练集和cv集的误差都很大，说明欠拟合</p>
+<p>(2) 再看曲线右边，当 d=4 ，训练集误差很小、cv集误差远大于训练误差，说明在训练集上过拟合</p>
+<img src="/2021/11/24/Ml_Sixthweek/15.png" alt="img" style="zoom: 50%;">
+</blockquote>
+<h3><span id="regularization-and-bias-variance-zheng-ze-hua-he-pian-chai-fang-chai"> Regularization and Bias/Variance 正则化 和 偏差/方差</span><a href="#regularization-and-bias-variance-zheng-ze-hua-he-pian-chai-fang-chai" class="header-anchor">#</a></h3>
+<blockquote>
+<p>考虑正则化的线性回归模型：</p>
+<p>(1) 当 λ 过大，θ 被惩罚后会变得很小、接近于0，最后方程只剩下 θ0 这一项，成为一条直线，导致高偏差bias、欠拟合。</p>
+<p>(2) 当 λ 过小，正则项不起作用，导致高方差 variance、过拟合。</p>
+<img src="/2021/11/24/Ml_Sixthweek/16.png" alt="img" style="zoom: 50%;">
+<p>那怎么选择 λ 的值呢？</p>
+<p>首先，当我们定义每个集合上的误差函数时，不考虑 λ。</p>
+<img src="/2021/11/24/Ml_Sixthweek/17.png" alt="img" style="zoom:50%;">
+<p>然后按照步长两倍的方式递增 λ，针对每个 λ 训练θ。然后分别计算对应的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mrow><mi>c</mi><mi>v</mi></mrow></msub><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">J_{cv}(θ)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span></span></span></span>，得到最小的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mrow><mi>c</mi><mi>v</mi></mrow></msub><mo stretchy="false">(</mo><msup><mi>θ</mi><mrow><mo stretchy="false">(</mo><mn>5</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">J_{cv}(θ^{(5)})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">5</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>。然后在 test 集合上进行测试。</p>
+ <img src="/2021/11/24/Ml_Sixthweek/18.png" alt="img" style="zoom:50%;">
+<p>现在我们看一下，λ 的大小对损失函数的影响。</p>
+<p>(1) 先看曲线左边，当 λ 很小 ，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mrow><mi>c</mi><mi>v</mi></mrow></msub><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">J_{cv}(θ)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span></span></span></span>的值远大于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">J_{train}(θ)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span></span></span></span>，说明过拟合</p>
+<p>(2) 再看曲线右边，当 λ 很大 ，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mrow><mi>c</mi><mi>v</mi></mrow></msub><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">J_{cv}(θ)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span></span></span></span> 和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">J_{train}(θ)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span></span></span></span>都很大，说明欠拟合</p>
+<img src="/2021/11/24/Ml_Sixthweek/19.png" alt="img" style="zoom:50%;">
+</blockquote>
+<h3><span id="learning-curves-xue-xi-qu-xian"> Learning Curves 学习曲线</span><a href="#learning-curves-xue-xi-qu-xian" class="header-anchor">#</a></h3>
+<blockquote>
+<p>m指训练样本的个数，曲线显示不同的m对于J(θ)的影响</p>
+<img src="/2021/11/24/Ml_Sixthweek/20.png" alt="img" style="zoom:50%;">
+<p>高偏差 bias、欠拟合：</p>
+<img src="/2021/11/24/Ml_Sixthweek/21.png" alt="img" style="zoom:50%;">
+<p>高方差 variance、过拟合。两个曲线会有一个很大的gap：</p>
+ <img src="/2021/11/24/Ml_Sixthweek/22.png" alt="img" style="zoom:50%;">
+</blockquote>
+<h3><span id="deciding-what-to-do-next-revisited"> Deciding What to Do Next Revisited</span><a href="#deciding-what-to-do-next-revisited" class="header-anchor">#</a></h3>
+<blockquote>
+<p>每种解决方案对应的问题如下（箭头右侧指向的是表现出的问题，左侧是解决方案）：</p>
+<img src="/2021/11/24/Ml_Sixthweek/23.png" alt="img" style="zoom:50%;">
+<p>对于神经网络，开始可以尝试一个相对比较简单的神经网络模型，计算量小。</p>
+<p>如果使用大型神经网络，使用正则化来修正过拟合。</p>
+<p>如果不知道选择几层hidden layer，可以将数据分为三个数据集之后，分别做测试。</p>
+<img src="/2021/11/24/Ml_Sixthweek/24.png" alt="img" style="zoom:50%;">
+</blockquote>
+<h3><span id="guan-yu-pian-chai-he-fang-chai"> 关于偏差和方差</span><a href="#guan-yu-pian-chai-he-fang-chai" class="header-anchor">#</a></h3>
+<blockquote>
+<p>关于偏差和方差的解释，参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010626937/article/details/74435109">https://blog.csdn.net/u010626937/article/details/74435109</a></p>
+<p><strong>偏差</strong>：描述的是预测值的期望与真实值之间的差距。偏差越大，越偏离真实数据集。（Ps:假设靶心是最适合给定数据的模型，离靶心越远，我们的预测就越糟糕）</p>
+<p><strong>方差</strong>：描述的是预测值的变化范围，离散程度，也就是离其期望值的距离。方差越大，预测结果数据的分布越散。</p>
+<p><strong>基于偏差的误差</strong>：所谓基于偏差的误差是我们模型预期的预测与我们将要预测的真实值之间的差值。偏差是用来衡量我们的模型的预测同真实值的差异。</p>
+<p><strong>基于方差的误差</strong>：基于方差的误差描述了一个模型对给定的数据进行预测的可变性。比如，当你多次重复构建完整模型的进程时，方差是在预测模型的不同关系间变化的多少。</p>
+<img src="/2021/11/24/Ml_Sixthweek/25.png" alt="img" style="zoom: 50%;">
+<p>左上：低偏差bias，低方差variance。预测结果准确率很高，并且模型比较健壮（稳定），预测结果高度集中。</p>
+<p>右上：低偏差bias，高方差variance。预测结果准确率较高，但是模型不稳定，预测结果比较发散。</p>
+<p>左下：高偏差bias，低方差variance。预测结果准确率较低，但是模型稳定，预测结果比较集中。</p>
+<p>右下：高偏差bias，高方差variance。预测结果准确率较低，并且模型不稳定，预测结果比较发散。</p>
+</blockquote>
+<h2><span id="machine-learning-system-design-ji-qi-xue-xi-xi-tong-she-ji"> Machine Learning System Design 机器学习系统设计</span><a href="#machine-learning-system-design-ji-qi-xue-xi-xi-tong-she-ji" class="header-anchor">#</a></h2>
+<h3><span id="prioritizing-what-to-work-on-spam-classification-example"> Prioritizing What to Work On：Spam classification example</span><a href="#prioritizing-what-to-work-on-spam-classification-example" class="header-anchor">#</a></h3>
+<blockquote>
+<p>本章中用一个实际例子： 垃圾邮件Spam的分类 来描述机器学习系统设计方法。首先来看两封邮件，左边是一封垃圾邮件Spam，右边是一封非垃圾邮件Non-Spam：<br>
+<img src="/2021/11/24/Ml_Sixthweek/26.png" alt="img" style="zoom:67%;"><br>
+垃圾邮件有很多features。如果我们想要建立一个Spam分类器，就要进行有监督学习，将Spam的features提取出来，而希望这些features能够很好的区分Spam。<br>
+<img src="/2021/11/24/Ml_Sixthweek/27.png" alt="img" style="zoom:50%;"><br>
+事实上，对于spam分类器，通常选取spam中词频最高的100个词来做feature。<br>
+为了构建分类器算法，可能有很多策略：</p>
+<ol>
+<li>收集更多的数据,让我们有更多的垃圾邮件和非垃圾邮件的样本</li>
+<li>基于邮件的路由信息开发一系列复杂的特征</li>
+<li>基于邮件的正文信息开发一系列复杂的特征,包括考虑截词的处理</li>
+<li>为探测刻意的拼写错误(把 watch 写成 w4tch)开发复杂的算法</li>
+</ol>
+</blockquote>
+<h3><span id="error-analysis-wu-chai-fen-xi"> Error Analysis 误差分析</span><a href="#error-analysis-wu-chai-fen-xi" class="header-anchor">#</a></h3>
+<blockquote>
+<p>构建一个学习算法的推荐方法为:</p>
+<ol>
+<li>从一个简单的能快速实现的算法开始,实现该算法并用交叉验证集数据测试这个算法</li>
+<li>绘制学习曲线,决定是增加更多数据,或者添加更多特征,还是其他选择</li>
+<li>进行误差分析:人工检查交叉验证集中我们算法中产生预测误差的实例,看看这些实例是否有某种系统化的趋势</li>
+</ol>
+<p>例如下图中，对100个分类错误的邮件进行人工分析，左边区分了它们的类型分布，右边分析没有被正确分类的原因。</p>
+<img src="/2021/11/24/Ml_Sixthweek/28.png" alt="img" style="zoom:50%;">
+<p>在误差分析的时候，不能单纯依靠直觉gut feeling ，而是用数字体现。</p>
+<p>例如，对于discount/discounts/discounted/discounting 是否被视为都含有discount这个feature。如果看作含有这个feature，结果有3%的error；如果不看做有这个feature，则有5%的error。以此进行比较。</p>
+<img src="/2021/11/24/Ml_Sixthweek/29.png" alt="img" style="zoom:50%;">
+注：使用Porter stemmer 这种软件可以合并类似的单词，但是也可能引发错误。
+</blockquote>
+<h3><span id="error-metrics-for-skewed-classes-lei-pian-xie-de-wu-chai-du-liang"> Error Metrics for Skewed Classes 类偏斜的误差度量</span><a href="#error-metrics-for-skewed-classes-lei-pian-xie-de-wu-chai-du-liang" class="header-anchor">#</a></h3>
+<blockquote>
+<p>Skewed Classes：一个分类问题，结果仅有两类y=0和y=1，其中一类样本非常多、另一类非常少。<br>
+对于偏斜数据集，如果单纯考虑准确率accuracy，会导致有时候模型预测的结果，还不如全部判断为1或者全部判断0 的结果好。 所以需要引入另外一些辅助度量指标</p>
+<p>考虑一个二分问题，即将实例分成正类（positive）或负类（negative）。对一个二分问题来说，会出现四种情况：</p>
+<ol>
+<li>
+<p>正确肯定(True Positive,TP)：预测为真,实际为真</p>
+</li>
+<li>
+<p>正确否定(True Negative,TN)：预测为假,实际为假</p>
+</li>
+<li>
+<p>错误肯定(False Positive,FP)：预测为真,实际为假</p>
+</li>
+<li>
+<p>错误否定(False Negative,FN)：预测为假,实际为真</p>
+<p>这样就可以建立一个Error Metrics（下图左），并定义precision和recall，如下图所示：<br>
+<img src="/2021/11/24/Ml_Sixthweek/30.png" alt="img" style="zoom:50%;"></p>
+</li>
+</ol>
+<img src="/2021/11/24/Ml_Sixthweek/32.png" alt="img" style="zoom: 67%;">
+<p>计算公式：</p>
+<img src="/2021/11/24/Ml_Sixthweek/31.png" alt="img" style="zoom: 50%;">
+<p>precision： 正确预测的正样本/所有预测为正样本的<br>
+recall：正确预测正样本/真实值为正样本的；</p>
+<p>假设有一个spam分类任务，测试集只有1%为spam邮件（y=1），99%为non-spam邮件（y=0）。</p>
+<p>（1）如果全都分类为non-spam 非垃圾邮件：</p>
+<p>precision=0/(0+1)=0，recall=0/(0+99)=0，accurancy=(0+99)/100*100% = 99%</p>
+<p>可以看出虽然acuracy 很高，但是recall 和 precision都是0，模型不合格。</p>
+<p>（2）如果全都分类为spam 垃圾邮件：</p>
+<p>precision=1/(99+1)*100%=1%, recall=1/(1+0)<em>100%=100%， accurancy=(1+0)/100</em>100% = 1%</p>
+<p>precision 和 accuracy 都很低，模型也不合格。</p>
+<p>所以，无论数据集是否偏斜，需要满足precision 和 recall 都很高才可以保证该算法的实用性。</p>
+</blockquote>
+<h3><span id="trading-off-precision-and-recall-cha-zhun-lu-he-cha-quan-lu-zhi-jian-de-quan-heng"> Trading Off Precision and Recall 查准率和查全率之间的权衡</span><a href="#trading-off-precision-and-recall-cha-zhun-lu-he-cha-quan-lu-zhi-jian-de-quan-heng" class="header-anchor">#</a></h3>
+<blockquote>
+<p>分类结果在0-1之间，所以我们需要选择一个阈值，大于阈值的分类为1，小于阈值的分类为0。</p>
+<p>precision-recall 和阈值的关系如下：</p>
+<img src="/2021/11/24/Ml_Sixthweek/33.png" alt="img" style="zoom:67%;">
+<p>threshould 设定越高，查准率Precision越高、查全率Recall越低。因为判断的准、但有更多正例被漏掉。</p>
+<p>threshould 设定越低，查准率Precision越低、查全率Recall越高。因为找的全，但有更多负例被错判为正例。</p>
+<p>那么如何选择阈值？ 我们引入一个评价标准 F1Score，选择使F1值最大的阈值<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>F</mi><mn>1</mn></msub><mtext> Score: </mtext><mn>2</mn><mfrac><mrow><mi>P</mi><mi>R</mi></mrow><mrow><mi>P</mi><mo>+</mo><mi>R</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">F_{1} \text { Score: } 2 \frac{P R}{P+R}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.275662em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord text"><span class="mord"> Score: </span></span><span class="mord">2</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.00773em;">R</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span><span class="mord mathdefault mtight" style="margin-right:0.00773em;">R</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>下面这个例子中，算法1的F1 值最高</p>
+<img src="/2021/11/24/Ml_Sixthweek/34.png" alt="img" style="zoom:50%;">
+</blockquote>
+<h3><span id="data-for-machine-learning-shu-ju-ji-da-xiao"> Data For Machine Learning 数据集大小</span><a href="#data-for-machine-learning-shu-ju-ji-da-xiao" class="header-anchor">#</a></h3>
+<blockquote>
+<p>对于机器学习，通常可以选择很多不同的算法进行预测，随着训练集规模增大，Accuracy一般会提高：<br>
+<img src="/2021/11/24/Ml_Sixthweek/35.png" alt="img" style="zoom:50%;"><br>
+但事实上，单纯增大数据集并不能解决一切问题。 如果数据集中含的信息很少（比如想对房价进行预测，但是只有面积数据。这时候即使增加数据、或者对模型在面积这个feature上进行多项式处理，也起不到好的效果）</p>
+<p>总之，结论为：</p>
+<p>如果模型欠拟合，即偏差bias大： 那就要增加特征（对神经网络增加hidden units）;</p>
+<p>如果模型过拟合，即方差variance大： 那就要增大数据集，使得<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mrow><mi>c</mi><mi>v</mi></mrow></msub></mrow><annotation encoding="application/x-tex">J_{cv}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ≈ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>J</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>i</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">J_{train}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.09618em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ，从而降低过拟合。</p>
+</blockquote>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Lucas-Zh</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://exlucas1.github.io/2021/11/24/Ml_Sixthweek/">http://exlucas1.github.io/2021/11/24/Ml_Sixthweek/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2021 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><i class="iconfont icon-tags "></i> 机器学习</a>
+                    
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%8A%E6%96%AD/"><i class="iconfont icon-tags "></i> 机器学习诊断</a>
+                    
+                        <a href="/tags/%E5%81%8F%E5%B7%AE%E5%92%8C%E6%96%B9%E5%B7%AE/"><i class="iconfont icon-tags "></i> 偏差和方差</a>
+                    
+                        <a href="/tags/%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90/"><i class="iconfont icon-tags "></i> 误差分析</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();"><i class="iconfont icon-back"></i> Back</a>
+                <span>· </span>
+                <a href="/"><i class="iconfont icon-home"></i> Home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/11/24/Ml_Fifthweek/">吴恩达机器学习-第[5]周</a>
+            
+        </section>
+        <br>
+        
+            <section id="comments" class="comments">
+              <style>
+                  .comments{ margin-top: 30px;}
+                  .v .vlist .vcard .vcontent {padding-top: 0;}
+                  .vcontent p { color:grey; margin-bottom: 10px;}
+                  .v * {line-height: normal;}
+                  .v .vwrap  {border-radius: 0px; padding: 10px;}
+                  .v .vbtn {border-radius: 0px;}
+                  .v code, .v pre {border-radius: 0px;}
+                  .v .vlist .vcard .vhead .vsys {border-radius: 1px; padding: 2px;}
+                  .v .vlist .vcard .vhead .vnick {color: #2d96bd;}
+                  .v .vlist .vcard .vh .vmeta .vat{color: #c7254e;}
+                  .v .vlist .vcard {padding-top: 0;}
+                  .v .vlist .vcard .vimg { width: 2.5em; height: 2.5em; }
+                  .v .vlist .vcard .vquote .vimg { width: 2.5em; height: 2.5em; }
+              </style>
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '.valine_comment',
+        app_id: 'LI3918a02QlTElzicqpsV25J-gzGzoHsz',
+        app_key: 'VH5QibEbLcCyjfR1cAAflXuY',
+        placeholder: 'You can comment here.',
+        notify: 'true',
+        verify: 'true',
+        avatar: 'retro',
+        visitor: 'true'
+    });
+</script>
+            </section>
+        
+
+    </article>
+    
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>
+            <i class="iconfont icon-beianxinxi"></i><a href="https://beian.miit.gov.cn" target="_blank">闽ICP备2021017013号</a>
+            
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-user1"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-eye1"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
